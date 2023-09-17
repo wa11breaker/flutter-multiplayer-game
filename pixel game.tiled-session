@@ -5,8 +5,8 @@
     },
     "activeFile": "assets/tiles/bg.tmx",
     "expandedProjectPaths": [
-        "assets",
-        "."
+        ".",
+        "assets"
     ],
     "fileStates": {
         "TX Tileset Grass.tsx": {
@@ -18,11 +18,11 @@
             "scaleInEditor": 1
         },
         "assets/tiles/bg.tmx": {
-            "scale": 0.4724,
-            "selectedLayer": 0,
+            "scale": 0.4018,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 61.388653683319234,
-                "y": 442.4216765453006
+                "x": 704.3305126928822,
+                "y": 740.4181184668989
             }
         },
         "bg.tmx": {
