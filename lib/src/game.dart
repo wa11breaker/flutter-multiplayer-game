@@ -1,44 +1,35 @@
 import 'dart:async';
 
+import 'package:flame/components.dart';
+import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
-import 'package:game/src/world.dart';
+import 'package:game/src/levels/levels.dart';
 
-class GameView extends StatefulWidget {
-  const GameView({super.key});
-
+class AppGame extends FlameGame {
   @override
-  State<GameView> createState() => _GameViewState();
-}
-
-class _GameViewState extends State<GameView> {
-  double _turn = 0.0;
-  double _x = 0.0;
-  double _y = 0.0;
-
-  void _gameLoop() {
-    setState(() {
-      _turn += 0.01;
-      _x += 0.1;
-      _y += 0.2;
-    });
+  Color backgroundColor() {
+    return Colors.green;
   }
 
-  @override
-  void initState() {
-    super.initState();
-
-    // Create a timer that will call the gameLoop() function every frame.
-    Timer.periodic(Duration(milliseconds: 100), (_) => _gameLoop());
-  }
+  late final CameraComponent cam;
+  final world = Level();
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: CustomPaint(
-          painter: WolrldPainterPainter(),
-        ),
-      ),
+  FutureOr<void> onLoad() async {
+    await images.loadAllImages();
+
+    cam = CameraComponent.withFixedResolution(
+      world: world,
+      width: 1280,
+      height: 1280,
     );
+    cam.viewfinder.anchor = Anchor.topLeft;
+
+    addAll([
+      cam,
+      world,
+    ]);
+
+    return super.onLoad();
   }
 }
