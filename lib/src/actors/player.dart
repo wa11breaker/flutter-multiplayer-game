@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flame/components.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:game/src/game.dart';
 
@@ -16,10 +15,11 @@ class Player extends SpriteAnimationGroupComponent
   late final SpriteAnimation idleAnimation;
   late final SpriteAnimation runAnimation;
 
-  PlayerDirection playerDirection = PlayerDirection.idel;
+  int horizontalInput = 0;
+  int verticalInput = 0;
+
   double moveSpeed = 100;
   Vector2 velocity = Vector2.zero();
-  bool isFacingLeft = false;
 
   @override
   FutureOr<void> onLoad() {
@@ -42,59 +42,41 @@ class Player extends SpriteAnimationGroupComponent
 
     final isUpKeyPressed = keysPressed.contains(LogicalKeyboardKey.keyW) ||
         keysPressed.contains(LogicalKeyboardKey.arrowUp);
+
     final isDownKeyPressed = keysPressed.contains(LogicalKeyboardKey.keyS) ||
         keysPressed.contains(LogicalKeyboardKey.arrowDown);
 
-    if (isLeftKeyPressed && isRightKeyPressed) {
-      playerDirection = PlayerDirection.idel;
-    } else if (isLeftKeyPressed) {
-      playerDirection = PlayerDirection.left;
+    if (isLeftKeyPressed) {
+      horizontalInput = -1;
     } else if (isRightKeyPressed) {
-      playerDirection = PlayerDirection.right;
-    } else if (isUpKeyPressed) {
-      playerDirection = PlayerDirection.top;
-    } else if (isDownKeyPressed) {
-      playerDirection = PlayerDirection.bottom;
+      horizontalInput = 1;
     } else {
-      playerDirection = PlayerDirection.idel;
+      horizontalInput = 0;
     }
 
-    return super.onKeyEvent(event, keysPressed);
+    if (isUpKeyPressed) {
+      verticalInput = -1;
+    } else if (isDownKeyPressed) {
+      verticalInput = 1;
+    } else {
+      verticalInput = 0;
+    }
+
+    super.onKeyEvent(event, keysPressed);
+    return false;
   }
 
   void _updatePlayerMovement(double dt) {
     double dirX = 0.0;
     double dirY = 0.0;
 
-    switch (playerDirection) {
-      case PlayerDirection.left:
-        current = PlayerState.running;
-        dirX -= moveSpeed;
-        if (!isFacingLeft) {
-          flipHorizontallyAroundCenter();
-          isFacingLeft = true;
-        }
-        break;
-      case PlayerDirection.right:
-        dirX += moveSpeed;
-        if (isFacingLeft) {
-          flipHorizontallyAroundCenter();
-          isFacingLeft = false;
-        }
-        break;
-      case PlayerDirection.top:
-        dirY -= moveSpeed;
-        break;
-      case PlayerDirection.bottom:
-        dirY += moveSpeed;
-        break;
-      case PlayerDirection.idel:
-        current = PlayerState.idle;
-        break;
-
-      default:
-        break;
+    double _mSpeed = moveSpeed;
+    if (horizontalInput.abs() == 1 && verticalInput.abs() == 1) {
+      _mSpeed = moveSpeed / 1.5;
     }
+
+    dirX += horizontalInput * _mSpeed;
+    dirY += verticalInput * _mSpeed;
 
     velocity = Vector2(dirX, dirY);
     position += velocity * dt;
@@ -102,26 +84,16 @@ class Player extends SpriteAnimationGroupComponent
 
   void _loadAllAnimation() {
     idleAnimation = SpriteAnimation.fromFrameData(
-      game.images.fromCache('characters/character-1/idle sheet-Sheet.png'),
+      game.images.fromCache('texture/TX Player.png'),
       SpriteAnimationData.sequenced(
-        amount: 18,
+        amount: 1,
         stepTime: 0.05,
-        textureSize: Vector2.all(80),
-      ),
-    );
-
-    runAnimation = SpriteAnimation.fromFrameData(
-      game.images.fromCache('characters/character-1/idle sheet-Sheet.png'),
-      SpriteAnimationData.sequenced(
-        amount: 18,
-        stepTime: 0.05,
-        textureSize: Vector2.all(80),
+        textureSize: Vector2(32, 64),
       ),
     );
 
     animations = {
       PlayerState.idle: idleAnimation,
-      PlayerState.running: runAnimation,
     };
     current = PlayerState.idle;
   }

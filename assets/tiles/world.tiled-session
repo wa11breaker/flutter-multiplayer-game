@@ -1,0 +1,49 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "world.tmx",
+    "expandedProjectPaths": [
+        "."
+    ],
+    "fileStates": {
+        "ground.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "plant.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "world.tmx": {
+            "scale": 2.5112,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": 691.3029627269831,
+                "y": 464.5189550812361
+            }
+        }
+    },
+    "last.imagePath": "/Users/akshay/Development/opensource/game/assets/images/texture",
+    "map.height": 34,
+    "map.lastUsedFormat": "tmx",
+    "map.width": 60,
+    "openFiles": [
+        "world.tmx",
+        "ground.tsx",
+        "plant.tsx",
+        "plant.tsx"
+    ],
+    "project": "world.tiled-project",
+    "recentFiles": [
+        "plant.tsx",
+        "ground.tsx",
+        "world.tmx"
+    ],
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 32,
+        "width": 32
+    }
+}

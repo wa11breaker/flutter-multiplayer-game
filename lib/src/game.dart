@@ -9,7 +9,7 @@ import 'package:game/src/levels/levels.dart';
 class AppGame extends FlameGame with HasKeyboardHandlerComponents {
   @override
   Color backgroundColor() {
-    return Colors.green;
+    return const Color(0xff72751B);
   }
 
   late final CameraComponent cam;
@@ -21,9 +21,10 @@ class AppGame extends FlameGame with HasKeyboardHandlerComponents {
 
     cam = CameraComponent.withFixedResolution(
       world: world,
-      width: 1280,
-      height: 1280,
-    );
+      width: 1920,
+      height: 1080,
+   );
+
     cam.viewfinder.anchor = Anchor.topLeft;
 
     addAll([
