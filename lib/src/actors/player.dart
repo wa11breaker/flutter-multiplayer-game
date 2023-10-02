@@ -70,13 +70,13 @@ class Player extends SpriteAnimationGroupComponent
     double dirX = 0.0;
     double dirY = 0.0;
 
-    double _mSpeed = moveSpeed;
+    double mSpeed = moveSpeed;
     if (horizontalInput.abs() == 1 && verticalInput.abs() == 1) {
-      _mSpeed = moveSpeed / 1.5;
+      mSpeed = moveSpeed / 1.5;
     }
 
-    dirX += horizontalInput * _mSpeed;
-    dirY += verticalInput * _mSpeed;
+    dirX += horizontalInput * mSpeed;
+    dirY += verticalInput * mSpeed;
 
     velocity = Vector2(dirX, dirY);
     position += velocity * dt;
