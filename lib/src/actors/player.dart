@@ -39,10 +39,8 @@ class Player extends SpriteAnimationGroupComponent
         keysPressed.contains(LogicalKeyboardKey.arrowLeft);
     final isRightKeyPressed = keysPressed.contains(LogicalKeyboardKey.keyD) ||
         keysPressed.contains(LogicalKeyboardKey.arrowRight);
-
     final isUpKeyPressed = keysPressed.contains(LogicalKeyboardKey.keyW) ||
         keysPressed.contains(LogicalKeyboardKey.arrowUp);
-
     final isDownKeyPressed = keysPressed.contains(LogicalKeyboardKey.keyS) ||
         keysPressed.contains(LogicalKeyboardKey.arrowDown);
 
