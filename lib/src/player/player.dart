@@ -4,13 +4,10 @@ import 'package:flame/components.dart';
 import 'package:flutter/services.dart';
 import 'package:game/src/game.dart';
 
-enum PlayerState { idle, running }
-
-enum PlayerDirection { left, right, top, bottom, idel }
 
 class Player extends SpriteAnimationGroupComponent
     with HasGameRef<AppGame>, KeyboardHandler {
-  Player({position}) : super(position: position);
+  Player({position}) : super(position: position, priority: 100);
 
   late final SpriteAnimation idleAnimation;
   late final SpriteAnimation runAnimation;
@@ -91,8 +88,8 @@ class Player extends SpriteAnimationGroupComponent
     );
 
     animations = {
-      PlayerState.idle: idleAnimation,
+      'foo': idleAnimation,
     };
-    current = PlayerState.idle;
+    current = 'foo';
   }
 }

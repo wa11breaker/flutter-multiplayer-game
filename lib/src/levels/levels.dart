@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:flame/components.dart';
 import 'package:flame_tiled/flame_tiled.dart';
-import 'package:game/src/actors/player.dart';
 import 'package:game/src/game.dart';
+import 'package:game/src/player/player.dart';
 
 class Level extends World with ParentIsA<AppGame> {
   late TiledComponent level;
@@ -12,8 +12,8 @@ class Level extends World with ParentIsA<AppGame> {
   @override
   FutureOr<void> onLoad() async {
     await _setupLevel();
-    await _setupActor();
-    await _setupCamera();
+    // await _setupActor();
+    // await _setupCamera();
     return super.onLoad();
   }
 
