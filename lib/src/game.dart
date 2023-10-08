@@ -52,7 +52,8 @@ class AppGame extends FlameGame with HasKeyboardHandlerComponents {
 
     for (final sp in spawnPoint!.objects) {
       if (sp.class_ == 'player') {
-        playerState = PlayerState(isMe: true, xPosition: sp.x, yPosition: sp.y);
+        playerState = PlayerState(isMe: true, position: Vector2(sp.x, sp.y));
+        playerState.init();
         player = Player(position: Vector2(sp.x, sp.y));
         add(player);
         cam.follow(player);

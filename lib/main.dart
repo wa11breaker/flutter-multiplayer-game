@@ -1,7 +1,10 @@
-import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
-import 'package:game/src/game.dart';
+import 'package:game/src/page/main_menu_page.dart';
 
 void main() {
-  runApp(GameWidget(game: AppGame()));
+  runApp(
+    const MaterialApp(
+      home: MainMenuPage(),
+    ),
+  );
 }

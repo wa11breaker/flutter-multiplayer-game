@@ -4,7 +4,6 @@ import 'package:flame/components.dart';
 import 'package:flutter/services.dart';
 import 'package:game/src/game.dart';
 
-
 class Player extends SpriteAnimationGroupComponent
     with HasGameRef<AppGame>, KeyboardHandler {
   Player({position}) : super(position: position, priority: 100);
@@ -15,7 +14,7 @@ class Player extends SpriteAnimationGroupComponent
   int horizontalInput = 0;
   int verticalInput = 0;
 
-  double moveSpeed = 100;
+  double moveSpeed = 50;
   Vector2 velocity = Vector2.zero();
 
   @override
@@ -56,6 +55,8 @@ class Player extends SpriteAnimationGroupComponent
     } else {
       verticalInput = 0;
     }
+
+    gameRef.playerState.updatePosition(position);
 
     super.onKeyEvent(event, keysPressed);
     return false;
